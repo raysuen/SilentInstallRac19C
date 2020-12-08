@@ -247,7 +247,7 @@ InstallInstance(){
 		-asmSysPassword oracle \
 		-initParams processes=1500,pga_aggregate_target=${PGASize},sga_target=${SGASize} \
 		-createAsContainerDatabase true \
-		-pdbName orclpdb \
+		-pdbName ${PDBName} \
 		-numberOfPDBs 1 \
 		-pdbAdminPassword oracle
 
