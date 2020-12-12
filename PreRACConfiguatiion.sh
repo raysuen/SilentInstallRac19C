@@ -23,12 +23,12 @@ DefaultUserPWD="Cn00c36663"  #set a password for grid and oracle
 #install rpm that oracle is necessary for installing
 ####################################################################################
 InstallRPM(){
-	mountPatch=`mount | egrep "iso|ISO" | awk '{print $3}'`
+	mountPatch=`mount | egrep "iso|ISO" | awk '{print $3}'`   #get IOS path which was mounted.
 	if [ ! ${mountPatch} ];then
-		echo "The ISO file is not mounted on system."
+		echo "The ISO file is not mounted on system."  #if the path is empty,exit.
         exit 99
-    else
-    	[ -f /etc/yum.repos.d/local.repo ] && sed -i '/^#OraConfBegin/,/^#OraConfEnd/d' /etc/yum.repos.d/local.repo
+    else  #if the path exist, create the repo file for mounted ISO
+    	[ -f /etc/yum.repos.d/local.repo ] && sed -i '/^#OraConfBegin/,/^#OraConfEnd/d' /etc/yum.repos.d/local.repo  #replace contents in local repo
     	echo "#OraConfBegin" >> /etc/yum.repos.d/local.repo
     	echo "[server]" >> /etc/yum.repos.d/local.repo
 		echo "name=server" >> /etc/yum.repos.d/local.repo
@@ -44,7 +44,7 @@ InstallRPM(){
 	do
 		if [ `rpm -q bc gcc gcc-c++  binutils  make gdb cmake  glibc ksh elfutils-libelf elfutils-libelf-devel fontconfig-devel glibc-devel libaio libaio-devel libXrender libXrender-devel libX11 libXau sysstat libXi libXtst libgcc librdmacm-devel libstdc++ libstdc++-devel libxcb net-tools nfs-utils compat-libcap1 smartmontools  targetcli python python-configshell python-rtslib python-six  unixODBC unixODBC-devel --qf '%{name}.%{arch}\n'| grep "not installed" | wc -l` -gt 0 ];then
 			rpm -q bc gcc gcc-c++  binutils  make gdb cmake  glibc ksh elfutils-libelf elfutils-libelf-devel fontconfig-devel glibc-devel libaio libaio-devel libXrender libXrender-devel libX11 libXau sysstat libXi libXtst libgcc librdmacm-devel libstdc++ libstdc++-devel libxcb net-tools nfs-utils compat-libcap1  smartmontools  targetcli python python-configshell python-rtslib python-six  unixODBC unixODBC-devel --qf '%{name}.%{arch}\n'| grep "not installed"
-			read -p "`echo -e "Please confirm that all rpm package have installed.[${c_yellow}yes/no${c_end}] default yes:"`" ans
+			read -p "`echo -e "Please confirm that all rpm package have installed.[${c_yellow}yes/no${c_end}] default yes:"`" ans  #confirm that all rpm was installed
 			if [ "${ans:-yes}" == "yes" ];then
 				break
 			else

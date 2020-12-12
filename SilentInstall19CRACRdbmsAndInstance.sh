@@ -260,7 +260,7 @@ InstallInstance(){
 ####################################################################################
 #entrance of script
 ####################################################################################
-#UnzipAndInstallRdbms
+UnzipAndInstallRdbms
 InstallInstance
 
 
