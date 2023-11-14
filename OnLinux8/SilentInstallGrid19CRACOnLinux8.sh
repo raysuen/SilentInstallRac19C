@@ -120,19 +120,19 @@ CreateGirdRspFile(){
 	####################################################################################
 	#get hostname and hostname-vip
 	####################################################################################
-	if [ ! ${hostnames} ];then
-		exhostnames="`hostname`:`hostname`-vip"
+	if [ ! ${rhostnames} ];then
+		exhostnames="node1:node1-vip,node2:node2-vip"
 		while true
 		do
 			echo "please enter the whole nodes's hostname.And you use commas to separated the multiple groups of names。"
-			read -p "`echo -e "Example: \e[1;33 ${exhostnames} \e[0m: "`" hostnames
-			if [ ${hostnames} ];then
-				echo -e "Your hostnames are \e[1;33m " ${hostnames} " \e[0m."
+			read -p "`echo -e "Example \e[1;33m${exhostnames} \e[0m: "`" rhostnames
+			if [ ${rhostnames} ];then
+				echo -e "Your hostnames are \e[1;33m " ${rhostnames} " \e[0m."
 			else
 				echo "\e[1;33The hostnames can be empty!!\e[0m"
 				continue
 			fi
-			read -p "`echo -e "please confirm the hostnames \e[1;33m${hostnames}\e[0m , yes/no,default \e[1;33myes\e[0m: "`" hostConfirm
+			read -p "`echo -e "please confirm the hostnames \e[1;33m ${rhostnames} \e[0m , yes/no,default \e[1;33myes\e[0m: "`" hostConfirm
 			if [ ${hostConfirm:=yes} == "yes" ];then
 				break
 			elif [ ${hostConfirm:=yes} == "no" ];then
@@ -336,7 +336,7 @@ InstallGrid(){
  oracle.install.crs.config.clusterName=${clustername} 
  oracle.install.crs.config.gpnp.configureGNS=false 
  oracle.install.crs.config.autoConfigureClusterNodeVIP=false 
- oracle.install.crs.config.clusterNodes=${hostnames} 
+ oracle.install.crs.config.clusterNodes=${rhostnames} 
  oracle.install.crs.config.networkInterfaceList=${NetworkMS} 
  oracle.install.asm.configureGIMRDataDG=false 
  oracle.install.crs.config.useIPMI=false 
@@ -373,7 +373,7 @@ InstallGrid(){
  oracle.install.crs.config.clusterName=${clustername} 
  oracle.install.crs.config.gpnp.configureGNS=false 
  oracle.install.crs.config.autoConfigureClusterNodeVIP=false 
- oracle.install.crs.config.clusterNodes=${hostnames} 
+ oracle.install.crs.config.clusterNodes=${rhostnames} 
  oracle.install.crs.config.networkInterfaceList=${NetworkMS} 
  oracle.install.asm.configureGIMRDataDG=false 
  oracle.install.crs.config.useIPMI=false 

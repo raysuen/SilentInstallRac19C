@@ -16,7 +16,7 @@
 #################################################################################
 
 
-DefaultUserPWD="Cn00c36663"  #set a password for grid and oracle
+DefaultUserPWD="**********"  #set a password for grid and oracle
 
 
 ####################################################################################
@@ -35,6 +35,7 @@ InstallRPM(){
 		echo "baseurl=file://"${mountPatch} >> /etc/yum.repos.d/local.repo
 		echo "enabled=1" >> /etc/yum.repos.d/local.repo
 		echo "gpgcheck=1" >> /etc/yum.repos.d/local.repo
+		echo "#OraConfEnd" >> /etc/yum.repos.d/local.repo
 		rpm --import ${mountPatch}/RPM-GPG-KEY-redhat-release
 
 	fi
