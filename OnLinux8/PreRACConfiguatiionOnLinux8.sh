@@ -1,6 +1,6 @@
 #!/bin/bash
 #by raysueen
-#v1.2
+#v1.5
 
 
 #################################################################################
@@ -68,6 +68,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 " >> /etc/yum.repos.d/local.repo
 
 	fi
+	dnf -y install ipcalc --nogpgcheck
 	dnf -y install bc --nogpgcheck
 	dnf -y install binutils --nogpgcheck
 	dnf -y install elfutils-libelf --nogpgcheck
